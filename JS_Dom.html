@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+    </script>
+    <style>
+        .ozel
+        {
+            background-color: silver;
+            color: orangered;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        //DOM(Document Object Model):Ram'de tutulan haline dom denir.
+
+        
+
+
+    </script>
+    <div>
+        <div>Merhaba DOM :)</div>
+    </div>
+    <h1>Deneme 123</h1>
+    <h1>Deneme 123</h1>
+    <h2>Deneme 123</h2>
+    <h1 id="uc">Deneme 123</h1>
+    <h4 class="ozel">Deneme 123</h4>
+    <h4 class="ozel">Deneme 123</h4>
+    <h4 class="ozel">Deneme 123</h4>
+
+    <ul id="sehirler">
+        <li>İstanbul</li>
+        <li>Ankara</li>
+        <li>Bursa</li>
+        <li>İzmir</li>
+    </ul>
+
+    <form action="" method="get">
+        <input type="text" value="Denemeler" name="ad" id="">
+    </form>
+    <script>
+        //HTML elementlere Ulaşma,Bulma
+        //1.Yöntem(ID'si üzeriden bulma)
+        let h1= document.getElementById("uc");
+        h1.innerHTML="Metin Değişti...";
+
+        let sehir=document.getElementById("sehirler");
+        document.writeln(sehir.innerHTML);
+        document.writeln(sehir.innerText);
+        sehir.innerHTML="<li>bom boş...</li>";
+
+        //2.Yöntem(Tag adı üzerinden arama,bulma)
+        let h4 = document.getElementsByTagName("h4");
+        for(elm of h4)
+        {
+            elm.innerText="Yeni değer";
+        }
+        for(let i=0;i<h4.length;i++)
+        {
+            h4[i].innerText="Denemeler";
+            
+        }
+        
+        //3.Yöntem(Class adı üzerinden araba,bulma)
+
+        let ozel=document.getElementsByClassName("ozel");
+        //foreach'in çalışabilmesi için Array.from() ile diziye çevirilmeli
+        let dizi= Array.from(ozel);
+        dizi.forEach(el => {
+            el.innerText="Arrow Op. usage";
+        });
+
+        //4.Yöntem(name'e göre bulma,arama)
+
+        let ad =document.getElementsByName("ad");
+        ad[0].value="mutlu";
+        // alert(ad[0].value);
+        
+        //5.Yöntem(querySelector kullanımı)
+
+        let div=document.querySelector("div div");
+
+        div.innerHTML="<h2>Div değişti</h2>";
+
+        let h3=document.querySelector("#uc");
+        h3.innerText="Selector'le değişti.";
+
+        let all=document.querySelectorAll("h1");
+
+        for(elm of all)
+        {
+            elm.innerText="All ile değiştirildi";
+        }
+
+        
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bir
+        {
+            background-color: lightpink;
+            color: purple;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 13px;
+            border-color: orangered;
+        }
+        .bir tr:nth-child(odd)
+        {
+            background-color:lightgray ;
+        }
+        .iki
+        {
+            background-color: whitesmoke;
+            color:yellowgreen;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            border-color: orange;
+        }
+        .iki tr:nth-child(odd)
+        {
+            background-color: lightyellow;
+        }
+        .uc
+        {
+            background-color: lightseagreen;
+            color: lightcoral;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 30px;
+            border-color: yellow;
+        }
+        .uc tr:nth-child(odd)
+        {
+            background-color: steelblue;
+        }
+    </style>
+    <script>
+        function tabloyaEkleFrm()
+        {
+            let txtBoxes=document.getElementsByTagName("input");
+            let tablo=document.getElementById("urunler");
+            let tr=document.createElement("tr");
+            
+            for(txt of txtBoxes)
+            {
+                let td=document.createElement("td");
+                td.innerText=txt.value;
+                tr.appendChild(td);
+            }
+            tablo.appendChild(tr);
+        }
+
+        function tabloyaEkleFrm2(...data)
+        {
+            let tablo=document.getElementById("urunler");
+            let tr=document.createElement("tr");
+            
+            for(txt of data)
+            {
+                let td=document.createElement("td");
+                td.innerText=txt.value;
+                tr.appendChild(td);
+            }
+
+            tablo.appendChild(tr);
+        }
+        function stil1(tema)
+        {
+            let tablo=document.getElementById("urunler");
+            tablo.setAttribute("class",tema)
+        }
+    </script>
+</head>
+<body>
+    <form action="" method="get" name="frmUrun">
+        <table>
+            <tr>
+                <td>Ürün ID</td>
+                <td><input type="text" name="urunid" id="urunid"></td>
+            </tr>
+            <tr>
+                <td>Ürün Adı</td>
+                <td><input type="text" name="urunadi" id="urunadi"></td>
+            </tr>
+            <tr>
+                <td>Fiyat</td>
+                <td><input type="text" name="fiyat" id="fiyat"></td>
+            </tr>
+        </table>
+    </form>
+
+    <button onclick="tabloyaEkle();">Gönder</button>
+    <button onclick="tabloyaEkleFrm()">Gönder(FRM)</button>
+    <button onclick="tabloyaEkleFrm2(frmUrun.urunid,frmUrun.urunadi,frmUrun.fiyat)">Gönder(FRM)2</button>
+    <br>
+    <button onclick="stil1('bir')">Stil 1</button>
+    <button onclick="stil1('iki')">Stil 2</button>
+    <button onclick="stil1('uc')">Stil 3</button>
+    
+
+    <table id='urunler' border=1>
+        <tr>
+            <td>Ürün ID</td>
+            <td>Ürün Adı</td>
+            <td>Fiyat</td>
+        </tr>
+    </table>
+        <script>
+            //Uzun yöntem
+            function tabloyaEkle()
+            {
+                let urunid=document.getElementById("urunid");
+                let urunadi=document.getElementById("urunadi");
+                let fiyat=document.getElementById("fiyat");
+
+                let tablo=document.getElementById("urunler");
+
+                let yenitr = document.createElement("tr");
+                let ıdtd=document.createElement("td");
+                let adtd=document.createElement("td");
+                let fiyattd=document.createElement("td");
+
+                ıdtd.innerText=urunid.value;
+                adtd.innerText=urunadi.value;
+                fiyattd.innerText=fiyat.value;
+
+                tablo.appendChild(yenitr);
+                yenitr.appendChild(ıdtd);
+                yenitr.appendChild(adtd);
+                yenitr.appendChild(fiyattd);
+                tablo.childNodes
+            }
+        </script>
+</body>
+</html>

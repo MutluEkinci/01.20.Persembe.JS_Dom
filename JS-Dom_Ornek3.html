@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="kutuphane.js"></script>
+    
+</head>
+<body>
+
+    <button onclick="fiyatEnUygun()">Fiyat Min</button>
+    <button onclick="fiyatEnPahalı()">Fiyat Max</button>
+    <button onclick="fiyatAralığı()">Fiyat Aralığı</button>
+    <button onclick="adaGoreKategorize(70,130,180)">Kategorize Et</button>
+
+    <script>
+        class Urunler
+        {
+            constructor(ad,maliyet,fiyat,kategori)
+            {
+                this.UrunAd=ad;
+                this.UrunMaliyet=maliyet;
+                this.UrunFiyat=fiyat;
+            }
+        }
+
+        let yemek1=new Urunler("Makarna",10,22);
+        let yemek2=new Urunler("Mantı",15,32);
+        let yemek3=new Urunler("Tavuk Sote",17,38);
+        let yemek4=new Urunler("Köfte",12,25);
+        let yemek5=new Urunler("Karnıyarık",9,18);
+
+        const yemekler=[];
+        yemekler.push(yemek1);
+        yemekler.push(yemek2);
+        yemekler.push(yemek3);
+        yemekler.push(yemek4);
+        yemekler.push(yemek5);
+        
+        
+        let diziYemek=[];
+        for(let i=0;i<25;i++)
+        {
+            let indis=MinMaxRandom(0,5);
+            diziYemek.push(yemekler[indis]);
+        }
+        tabloyaYaz(diziYemek);
+        
+        function fiyatEnUygun()
+        {
+            Temizle();
+            let tablo=document.getElementsByTagName("table")[0].children;
+            let min=3000;
+            for(satir of tablo)
+            {
+                for(sutun of satir.children)
+                {
+                    let fiyat=parseInt(sutun.children[2].innerText)
+                    if(fiyat<min)
+                    {
+                        min=parseInt(sutun.children[2].innerText);
+                    }
+                }
+            }
+            for(satir of tablo)
+            {
+                for(sutun of satir.children)
+                {
+                    if(min==parseInt(sutun.children[2].innerText))
+                    {
+                        sutun.setAttribute("style","background-color:blue");
+                    }
+                }
+            }
+        }
+
+        function fiyatEnPahalı()
+        {
+            Temizle();
+            let tablo=document.getElementsByTagName("table")[0].children;
+            let max=0;
+            for(satir of tablo)
+            {
+                for(sutun of satir.children)
+                {
+                    let fiyat=parseInt(sutun.children[2].innerText);
+                    if(fiyat>max)
+                    {
+                        max=parseInt(sutun.children[2].innerText);
+                    }
+                }
+            }
+            for(satir of tablo)
+            {
+                for(sutun of satir.children)
+                {
+                    if(max==parseInt(sutun.children[2].innerText))
+                    {
+                        sutun.setAttribute("style","background-color:red");
+                    }
+                }
+            }
+        }
+        
+        function fiyatAralığı(min,max)
+        {
+            Temizle();
+            min=prompt("İstediğiniz minimum değeri giriniz");
+            max=prompt("İstediğiniz maksimun değeri giriniz");
+
+            let tablo=document.getElementsByTagName("table")[0].children;
+
+            for(satir of tablo)
+            {
+                for(sutun of satir.children)
+                {
+                    let fiyat=parseInt(sutun.children[2].innerText);
+                    if(fiyat>=min && fiyat<=max) 
+                    {
+                        sutun.setAttribute("style","background-color:green");
+                    }
+                }
+            }
+        }
+
+        function adaGoreKategorize(r,g,b)
+        {
+            // let tablo=document.getElementsByTagName("table")[0].children;
+            // let dizi=[];
+            // for(satir of tablo)
+            // {
+            //     for(sutun of satir.children)
+            //     {
+            //         if(sutun.children[0].innerText=="Makarna")
+            //         {
+            //             sutun.setAttribute("style","background-color:yellow");
+            //         }
+            //         if(sutun.children[0].innerText=="Mantı")
+            //         {
+            //             sutun.setAttribute("style","background-color:gray");
+            //         }
+            //         if(sutun.children[0].innerText=="Karnıyarık")
+            //         {
+            //             sutun.setAttribute("style","background-color:purple");
+            //         }
+            //         if(sutun.children[0].innerText=="Tavuk Sote")
+            //         {
+            //             sutun.setAttribute("style","background-color:yellowgreen");
+            //         }
+            //         if(sutun.children[0].innerText=="Köfte")
+            //         {
+            //             sutun.setAttribute("style","background-color:red");
+            //         }
+            //     }
+            // }
+
+            Temizle();
+            let tablo=document.getElementsByTagName("tbody")[0].children;
+            let dizi=[];
+
+            for(let i=1;i<tablo.length;i++)
+            {
+                let ad=tablo[i].children[0].innerText;
+                if(dizi.indexOf(ad)<0)
+                {
+                    dizi.push(ad);
+                }
+            }
+            let renkTanımları=RenkOlustur(r,g,b,dizi.length);
+
+            for(let i=1;i<tablo.length;i++)
+            {
+                tablo[i].style.backgroundColor=renkTanımları[dizi.indexOf(tablo[i].children[0].innerText)];
+            }
+        }
+        function Temizle()
+        {
+            let tablo=document.getElementsByTagName("table")[0].children;
+
+            for(satir of tablo)
+            {
+                for(sutun of satir.children)
+                {
+                    sutun.style.backgroundColor="white";
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>

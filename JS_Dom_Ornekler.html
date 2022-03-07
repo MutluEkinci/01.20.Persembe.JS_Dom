@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function Mesaj(str)
+        {
+            alert(str);
+        }
+    </script>
+</head>
+<body>
+    <button onclick="Mesaj('Merhaba');" >Gönder</button>
+    <form action="" method="get">
+        <input type="text" name="text" id="text">
+    </form>
+    <ul id="sehirler">
+        <li>İstanbul</li>
+        <li>Ankara</li>
+        <li>Bursa</li>
+        <li>İzmir</li>
+    </ul>
+    <script>
+        //Soru:TextBox'a girilen değeri oluşturduğumuz listeye dinamik olarak oluşturma...
+        function sehirEkle()
+        {
+            let text =document.getElementById("text");
+            let sehir=document.getElementById("sehirler");
+            let yeni=document.createElement("li");
+            yeni.innerText=text.value;
+            sehir.appendChild(yeni);
+        }
+        
+    </script>
+    <button onclick="sehirEkle();">Ata</button>
+    
+</body>
+</html>
